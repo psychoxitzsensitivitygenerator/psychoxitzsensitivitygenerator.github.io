@@ -1,0 +1,494 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psycho Xitz's Brazilian Sensitivity Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #0a0b10;
+      --bg-card: rgba(18, 20, 29, 0.95);
+      --accent-color: #ff0055;
+      --accent-glow: rgba(255, 0, 85, 0.4);
+      --text-main: #ffffff;
+      --text-sub: #a0a5c0;
+      --border-color: rgba(255, 0, 85, 0.35);
+    }
+
+    body.cyber-yellow {
+      --bg-primary: #0b0d08;
+      --bg-card: rgba(22, 24, 15, 0.95);
+      --accent-color: #ffe600;
+      --accent-glow: rgba(255, 230, 0, 0.4);
+      --text-main: #ffffff;
+      --text-sub: #c0c4a0;
+      --border-color: rgba(255, 230, 0, 0.35);
+    }
+
+    body.brazil-green {
+      --bg-primary: #05120a;
+      --bg-card: rgba(12, 30, 18, 0.95);
+      --accent-color: #00ff66;
+      --accent-glow: rgba(0, 255, 102, 0.4);
+      --text-main: #ffffff;
+      --text-sub: #9edeb5;
+      --border-color: rgba(0, 255, 102, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(10, 11, 16, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .brand-title span {
+      color: var(--accent-color);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-selector {
+      background: #12141d;
+      color: #fff;
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .instagram-btn {
+      padding: 8px 12px;
+      background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1050px;
+      margin: 25px auto 0;
+      padding: 0 15px;
+    }
+
+    .hero-banner {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero-banner h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+
+    .hero-banner p {
+      color: var(--text-sub);
+      font-size: 1rem;
+    }
+
+    /* Robust Flexbox Layout to prevent rendering collapses */
+    .flex-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      flex: 1 1 450px;
+      min-width: 290px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+      color: var(--accent-color);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-sub);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 12px;
+      background: #000000;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .range-slider-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .range-slider {
+      flex: 1;
+      accent-color: var(--accent-color);
+    }
+
+    .range-val {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      width: 45px;
+      text-align: right;
+      color: var(--accent-color);
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      background: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .results-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .result-box {
+      flex: 1 1 45%;
+      min-width: 130px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .result-box .label {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .result-box .value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-color);
+    }
+
+    .highlight-box {
+      flex: 1 1 100%;
+      background: rgba(255, 0, 85, 0.08);
+      border-color: var(--border-color);
+    }
+
+    .pro-tip {
+      margin-top: 18px;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .about-card {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      color: var(--text-sub);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body id="appBody">
+
+  <header>
+    <div class="brand-title">Psycho <span>Xitz</span></div>
+    <div class="header-actions">
+      <select class="theme-selector" id="themeSelect" onchange="changeTheme(this.value)">
+        <option value="default">Neon Red</option>
+        <option value="cyber-yellow">Cyber Gold</option>
+        <option value="brazil-green">Brazilian Mint</option>
+      </select>
+      <a href="https://instagram.com/psycho_xitz_" target="_blank" class="instagram-btn">
+        📷 @psycho_xitz_
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <div class="hero-banner">
+      <h1>Brazilian Sensitivity Generator</h1>
+      <p>Hardware One-Tap Sensitivity Calibrator (0 - 200 Scale)</p>
+    </div>
+
+    <div class="flex-grid">
+      
+      <div class="card">
+        <div class="card-title">⚙️ Hardware Device Inputs</div>
+
+        <div class="form-group">
+          <label for="deviceInput">📱 Device Brand & Series</label>
+          <select id="deviceInput" class="form-control" onchange="runCalculation()">
+            <option value="samsung_a">Samsung Galaxy A Series (A14, A23, A34, A54, A55)</option>
+            <option value="samsung_s">Samsung Galaxy S / Z Ultra Series (S21, S22, S23, S24, S25)</option>
+            <option value="samsung_m_f">Samsung Galaxy M / F Series (M14, M34, M55, F14, F54)</option>
+            <option value="poco_x_f">POCO X / F Gaming Series (X3 Pro, X5, X6 Pro, F3, F5, F6)</option>
+            <option value="poco_m_c">POCO M / C Budget Series (M4, M5, M6 Pro, C55, C65)</option>
+            <option value="redmi_note">Redmi Note Series (Note 10, Note 11, Note 12, Note 13, Note 14)</option>
+            <option value="redmi_budget">Redmi Standard Series (Redmi 9, 10, 12, 13C)</option>
+            <option value="realme_gt">Realme GT / Pro Series (GT Neo 2/3/5, 11 Pro+, 12 Pro+)</option>
+            <option value="realme_narzo">Realme Narzo / C Series (Narzo 50/60/70, C53, C55)</option>
+            <option value="iqoo_gaming">iQOO Gaming Series (Neo 6/7/9 Pro, iQOO 9/11/12)</option>
+            <option value="iqoo_z_vivo">iQOO Z Series / Vivo V & T Series (Z7, Z9, V29, V30, T3)</option>
+            <option value="oneplus">OnePlus Series (Nord 2T/3/4, OnePlus 10, 11, 12)</option>
+            <option value="oppo">OPPO Reno / A / F Series (Reno 10/11/12, A78, F25)</option>
+            <option value="infinix_tecno">Infinix GT / Note & Tecno Pova Series (GT 10/20 Pro, Pova 5/6)</option>
+            <option value="infinix_hot_spark">Infinix Hot / Tecno Spark Budget Series</option>
+            <option value="iphone_new">Apple iPhone 13 / 14 / 15 / 16 Series</option>
+            <option value="iphone_old_ipad">Apple iPhone 11 / 12 / XR / iPad Series</option>
+            <option value="gaming_rog">ASUS ROG / RedMagic Gaming Phones</option>
+            <option value="moto_pixel">Motorola Edge / Google Pixel / Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ramInput">💾 System RAM</label>
+          <select id="ramInput" class="form-control" onchange="runCalculation()">
+            <option value="2">2 GB RAM</option>
+            <option value="3">3 GB RAM</option>
+            <option value="4">4 GB RAM</option>
+            <option value="6" selected>6 GB RAM</option>
+            <option value="8">8 GB RAM</option>
+            <option value="12">12 GB+ RAM</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="romInput">🗄️ Storage Speed (ROM)</label>
+          <select id="romInput" class="form-control" onchange="runCalculation()">
+            <option value="32">32 GB Storage</option>
+            <option value="64">64 GB Storage</option>
+            <option value="128" selected>128 GB Storage</option>
+            <option value="256">256 GB Storage</option>
+            <option value="512">512 GB+ Storage</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>🎯 Fire Button Size Position</label>
+          <div class="range-slider-wrapper">
+            <input type="range" id="fireSlider" class="range-slider" min="30" max="70" value="48" oninput="updateSlider(this.value)">
+            <span id="fireVal" class="range-val">48%</span>
+          </div>
+        </div>
+
+        <button type="button" class="generate-btn" onclick="runCalculation()">
+          ⚡ CALCULATE SENSITIVITY
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎯 Calibrated Sensitivity (0 - 200 Scale)</div>
+
+        <div class="results-flex">
+          <div class="result-box">
+            <div class="label">General</div>
+            <div class="value" id="resGeneral">194</div>
+          </div>
+          <div class="result-box">
+            <div class="label">Red Dot</div>
+            <div class="value" id="resRedDot">191</div>
+          </div>
+          <div class="result-box">
+            <div class="label">2x Scope</div>
+            <div class="value" id="res2x">198</div>
+          </div>
+          <div class="result-box">
+            <div class="label">4x Scope</div>
+            <div class="value" id="res4x">200</div>
+          </div>
+          <div class="result-box">
+            <div class="label">AWM Scope</div>
+            <div class="value" id="resAWM">112</div>
+          </div>
+          <div class="result-box">
+            <div class="label">Free Look</div>
+            <div class="value" id="resFreeLook">170</div>
+          </div>
+
+          <div class="result-box highlight-box">
+            <div class="label">Optimal Fire Button Size</div>
+            <div class="value" id="resFireButton">46%</div>
+          </div>
+
+          <div class="result-box highlight-box">
+            <div class="label">Recommended Device DPI</div>
+            <div class="value" id="resDPI">526 DPI</div>
+          </div>
+        </div>
+
+        <div class="pro-tip">
+          <strong>🔥 Pro Drag Tip:</strong> <span id="proTipText">Position your fire button at the bottom third of your screen and pull straight up for close combat.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card about-card">
+      <div class="card-title">👤 About Psycho Xitz</div>
+      <p style="color: var(--text-sub); line-height: 1.6;">
+        Welcome to <strong>Psycho Xitz's Official Brazilian Sensitivity Engine</strong>. Engineered using hardware touch response algorithms (ROM read/write speeds, RAM latency, and screen sampling rates) specifically calibrated for the Free Fire 0–200 sensitivity scale.
+      </p>
+      <p style="color: var(--text-sub); margin-top: 8px;">Follow on Instagram: <strong>@psycho_xitz_</strong></p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Psycho Xitz. Free Fire Sensitivity Engine.</p>
+  </footer>
+
+  <script>
+    function changeTheme(val) {
+      var body = document.getElementById('appBody');
+      body.className = (val === 'default') ? '' : val;
+    }
+
+    function updateSlider(val) {
+      document.getElementById('fireVal').innerText = val + '%';
+      runCalculation();
+    }
+
+    function runCalculation() {
+      var dev = document.getElementById('deviceInput').value;
+      var ram = parseInt(document.getElementById('ramInput').value);
+      var rom = parseInt(document.getElementById('romInput').value);
+      var userBtn = parseInt(document.getElementById('fireSlider').value);
+
+      var baseSens = 162;
+      var dpiBase = 510;
+      var tip = "Position your fire button low and drag straight up smoothly for high headshot accuracy.";
+
+      if (dev.indexOf('iphone') !== -1 || dev.indexOf('ipad') !== -1) {
+        baseSens = 150;
+        dpiBase = 0;
+        tip = "iOS Dynamic Response: Drag crosshairs steadily upward in a smooth line without harsh flicking.";
+      } else if (dev === 'gaming_rog' || dev === 'iqoo_gaming' || dev === 'poco_x_f') {
+        baseSens = 146;
+        dpiBase = 560;
+        tip = "High Touch Sampling Display: Lower base sensitivity keeps your crosshair locked directly at head height.";
+      } else if (dev === 'infinix_hot_spark' || dev === 'poco_m_c' || dev === 'redmi_budget' || ram <= 3) {
+        baseSens = 172;
+        dpiBase = 480;
+        tip = "Budget Device Compensation: High sensitivity values overcome hardware touch latency.";
+      } else if (dev.indexOf('samsung') !== -1) {
+        baseSens = (dev === 'samsung_s') ? 152 : 166;
+        dpiBase = 520;
+        tip = "Samsung Tip: Enable 'Touch Sensitivity' under Display Settings for extra responsiveness.";
+      }
+
+      var ramBoost = (12 - ram) * 2.2;
+      var romBoost = (rom <= 32) ? 14 : (rom <= 64) ? 9 : (rom <= 128) ? 4 : 0;
+
+      var general = Math.min(200, Math.round(baseSens + ramBoost + romBoost));
+      var redDot = Math.min(200, Math.round(general - 3));
+      var scope2x = Math.min(200, Math.round(general + 4));
+      var scope4x = Math.min(200, Math.round(general + 6));
+      var awm = Math.min(200, Math.round(general * 0.58));
+      var freeLook = Math.min(200, Math.round(general * 0.88));
+
+      var recBtn = userBtn;
+      if (ram <= 4) recBtn = Math.min(Math.max(userBtn - 4, 38), 46);
+      else recBtn = Math.min(Math.max(userBtn, 42), 52);
+
+      var dpiVal = (dpiBase === 0) ? "Default (iOS Dynamic)" : Math.round(dpiBase + (ramBoost * 2) + romBoost) + " DPI";
+
+      document.getElementById('resGeneral').innerText = general;
+      document.getElementById('resRedDot').innerText = redDot;
+      document.getElementById('res2x').innerText = scope2x;
+      document.getElementById('res4x').innerText = scope4x;
+      document.getElementById('resAWM').innerText = awm;
+      document.getElementById('resFreeLook').innerText = freeLook;
+      document.getElementById('resFireButton').innerText = recBtn + '%';
+      document.getElementById('resDPI').innerText = dpiVal;
+      document.getElementById('proTipText').innerText = tip;
+    }
+
+    // Run immediately when page opens
+    runCalculation();
+  </script>
+</body>
+</html>
+
+```
